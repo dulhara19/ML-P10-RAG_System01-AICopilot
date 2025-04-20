@@ -27,9 +27,6 @@ vectorstore = FAISS.from_documents(chunks, embed_model)
 # Check if FAISS has been populated
 print("FAISS vector store has been created.")
 
-# import os
-# from langchain.llms import Together
-# from langchain.chains import RetrievalQA
 
 from langchain_community.llms import Together
 import os
