@@ -1,19 +1,8 @@
-# ✅ Replace deprecated `langchain.document_loaders.TextLoader` and old imports with:
 from langchain_community.document_loaders import TextLoader
-
-# ✅ Correct embedding import (community version)
 from langchain_community.embeddings import HuggingFaceEmbeddings
-
-# ✅ Correct vectorstore import (community version)
 from langchain_community.vectorstores import FAISS
-
-# ✅ Correct Together model import (community version)
 from langchain_community.llms import Together
-
-# ✅ Chain module is still correct and not deprecated
 from langchain.chains import RetrievalQA
-
-# ✅ Text splitter import is still valid
 from langchain.text_splitter import CharacterTextSplitter
 
 
