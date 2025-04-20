@@ -5,8 +5,6 @@ from langchain_community.llms import Together
 from langchain.chains import RetrievalQA
 from langchain.text_splitter import CharacterTextSplitter
 
-
-
 # Load your FAQs document
 loader = TextLoader("faqs.txt", encoding="utf-8")
 docs = loader.load()
@@ -16,7 +14,6 @@ chunks = splitter.split_documents(docs)
 
 # Check if splitting worked
 print(f"Total chunks: {len(chunks)}")
-
 
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
