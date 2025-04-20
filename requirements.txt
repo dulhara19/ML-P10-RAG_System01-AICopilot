@@ -1,0 +1,7 @@
+openai
+langchain
+faiss-cpu
+streamlit
+python-dotenv
+langchain-community
+sentence-transformers
