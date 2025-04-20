@@ -54,5 +54,5 @@ question = "how can i buy laptop in UK?"
 response = qa_chain.invoke({"query": question})
 print(response["result"])  # This is the answer from the model
  
-# for i, doc in enumerate(response["source_documents"]):
-#     print(f"\n--- Source {i+1} ---\n{doc.page_content}")
+for i, doc in enumerate(response["source_documents"]):
+    print(f"\n--- Source {i+1} ---\n{doc.page_content}")
