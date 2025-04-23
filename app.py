@@ -33,7 +33,7 @@ from langchain_community.llms import Together
 import os
 
 # Set your Together API key
-os.environ["TOGETHER_API_KEY"] = "8b2035e3b8314dd8f68f02c652751e447eb94870e2f580ed1bb4955287318a14"
+os.environ["TOGETHER_API_KEY"] = "put your together api key here"
 
 # Initialize the Together model (DeepSeek)
 llm = Together(
