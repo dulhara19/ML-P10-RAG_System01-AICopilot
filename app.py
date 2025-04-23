@@ -5,9 +5,10 @@ from langchain_community.llms import Together
 from langchain.chains import RetrievalQA
 from langchain.text_splitter import CharacterTextSplitter
 
-# Load your FAQs document
+# Load FAQs document
 loader = TextLoader("faqs.txt", encoding="utf-8")
 docs = loader.load()
+
 # Split the document into smaller chunks for embedding
 splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 chunks = splitter.split_documents(docs)
