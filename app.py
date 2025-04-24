@@ -49,6 +49,20 @@ qa_chain = RetrievalQA.from_chain_type(
     return_source_documents=True  # Optional, if you want to return the source text as well
 )
 
+
+###################################
+from sentence_transformers import SentenceTransformer, util
+
+model = SentenceTransformer("all-MiniLM-L6-v2")
+score = util.cos_sim(
+    model.encode(generated_answer),
+    model.encode(ground_truth_answer)
+)
+print("Similarity score:", score.item())
+
+
+
+
 # Test if LLM is working with a question
 question = "how can i buy laptop in UK?"
 
