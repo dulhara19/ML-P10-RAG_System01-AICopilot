@@ -59,7 +59,7 @@ score = util.cos_sim(
     model.encode(ground_truth_answer)
 )
 print("Similarity score:", score.item())
-
+###################################
 
 
 
