@@ -55,10 +55,9 @@ qa_chain = RetrievalQA.from_chain_type(
 
 # You can evaluate programmatically using tools like:
 # 🔹 Embedding similarity
-
 #     Use cosine similarity to compare generated answer with expected answer (ground truth)
-
 #     Higher = better
+
 from sentence_transformers import SentenceTransformer, util
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
