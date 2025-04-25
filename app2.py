@@ -35,39 +35,56 @@ def update_knowledge_base(file_path: str):
 
     print(f"✅ {file_path} processed and added to DB.")
 
+# to convert pdf to txt in oreder to load it to the knowledge base    
 
-# update_knowledge_base("faqs2.txt")  # Call this function to update the knowledge base    
+import fitz  # PyMuPDF
 
-def search_from_db(query: str, top_k: int = 4):
-    query_embedding = embedding_model.embed_query(query)
+def convert_pdf_to_txt(pdf_path: str, txt_path: str):
+    doc = fitz.open(pdf_path)
+    text = ""
+    for page in doc:
+        text += page.get_text()
 
-    results = collection.aggregate([
-        {
-            "$vectorSearch": {
-                "queryVector": query_embedding,
-                "path": "embedding",
-                "numCandidates": 100,
-                "limit": top_k,
-                "index": "vector_index"  # Must be pre-created on MongoDB
-            }
-        }
-    ])
+    with open(txt_path, "w", encoding="utf-8") as f:
+        f.write(text)
+
+    print(f"✅ PDF converted and saved to: {txt_path}")
+
+
+convert_pdf_to_txt("/pdf_src/mfl.pdf", "book1.txt")
+
+update_knowledge_base("book1.txt")  # Call this function to update the knowledge base    
+
+# def search_from_db(query: str, top_k: int = 4):
+#     query_embedding = embedding_model.embed_query(query)
+
+#     results = collection.aggregate([
+#         {
+#             "$vectorSearch": {
+#                 "queryVector": query_embedding,
+#                 "path": "embedding",
+#                 "numCandidates": 100,
+#                 "limit": top_k,
+#                 "index": "vector_index"  # Must be pre-created on MongoDB
+#             }
+#         }
+#     ])
     
-    return list(results)
+#     return list(results)
 
 
-from langchain_community.llms import Together
-from langchain.schema import Document
+# from langchain_community.llms import Together
+# from langchain.schema import Document
 
-# LLM Setup (Together or OpenAI or whatever you like)
-import os
-os.environ["TOGETHER_API_KEY"] = "your-api-key"
+# # LLM Setup (Together or OpenAI or whatever you like)
+# import os
+# os.environ["TOGETHER_API_KEY"] = "8b2035e3b8314dd8f68f02c652751e447eb94870e2f580ed1bb4955287318a14"
 
-llm = Together(
-    model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
-    temperature=0.7,
-    max_tokens=512
-)
+# llm = Together(
+#     model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
+#     temperature=0.7,
+#     max_tokens=512
+# )
 
 # def answer_query(query: str):
 #     results = search_from_db(query)
@@ -76,7 +93,13 @@ llm = Together(
 
 #     # Very simple QA chain simulation
 #     combined_text = "\n\n".join(doc.page_content for doc in sources)
-#     prompt = f"Answer the following question based on the context:\n\n{combined_text}\n\nQuestion: {query}\nAnswer:"
+
+#     prompt = f"base on the contxt {sources} give answer to the question :{query}"
     
 #     response = llm.invoke(prompt)
 #     return response
+
+# # lets try it out :)
+# response = answer_query("How can I achieve financial freedom?")
+# print(response)
+
