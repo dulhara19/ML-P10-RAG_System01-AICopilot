@@ -50,5 +50,35 @@ def search_from_db(query: str, top_k: int = 4):
         }
     ])
     
-    
+
     return list(results)
+
+
+
+
+
+
+from langchain_community.llms import Together
+from langchain.schema import Document
+
+# LLM Setup (Together or OpenAI or whatever you like)
+import os
+os.environ["TOGETHER_API_KEY"] = "your-api-key"
+
+llm = Together(
+    model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
+    temperature=0.7,
+    max_tokens=512
+)
+
+def answer_query(query: str):
+    results = search_from_db(query)
+
+    sources = [Document(page_content=doc["content"]) for doc in results]
+
+    # Very simple QA chain simulation
+    combined_text = "\n\n".join(doc.page_content for doc in sources)
+    prompt = f"Answer the following question based on the context:\n\n{combined_text}\n\nQuestion: {query}\nAnswer:"
+    
+    response = llm.invoke(prompt)
+    return response
