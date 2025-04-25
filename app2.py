@@ -34,3 +34,20 @@ def update_knowledge_base(file_path: str):
         })
 
     print(f"✅ {file_path} processed and added to DB.")
+
+def search_from_db(query: str, top_k: int = 4):
+    query_embedding = embedding_model.embed_query(query)
+
+    results = collection.aggregate([
+        {
+            "$vectorSearch": {
+                "queryVector": query_embedding,
+                "path": "embedding",
+                "numCandidates": 100,
+                "limit": top_k,
+                "index": "faq_vector_index"  # Must be pre-created on MongoDB
+            }
+        }
+    ])
+    
+    return list(results)
