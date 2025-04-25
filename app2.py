@@ -59,15 +59,15 @@ def search_from_db(query: str, top_k: int = 4):
 from langchain_community.llms import Together
 from langchain.schema import Document
 
-# # LLM Setup (Together or OpenAI or whatever you like)
-# import os
-# os.environ["TOGETHER_API_KEY"] = "your-api-key"
+# LLM Setup (Together or OpenAI or whatever you like)
+import os
+os.environ["TOGETHER_API_KEY"] = "your-api-key"
 
-# llm = Together(
-#     model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
-#     temperature=0.7,
-#     max_tokens=512
-# )
+llm = Together(
+    model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
+    temperature=0.7,
+    max_tokens=512
+)
 
 # def answer_query(query: str):
 #     results = search_from_db(query)
