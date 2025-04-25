@@ -3,7 +3,7 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
 from dotenv import load_dotenv
-
+import os
 # Load environment variables from .env file
 load_dotenv()
 
@@ -43,6 +43,25 @@ def update_knowledge_base(file_path: str):
 
     print(f"✅ {file_path} processed and added to DB.")
 
+# Function to read the contents of the text file (book1.txt)
+def read_text_file(file_path):
+    with open(file_path, "r", encoding="utf-8") as file:
+        return file.read()
+
+# Example function to chunk large input into smaller pieces
+def chunk_input(text, max_tokens=8193):
+    # Break the text into chunks of a reasonable size (e.g., 4000 tokens)
+    chunk_size = max_tokens // 2  # Leave some room for the response
+    chunks = [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
+    return chunks
+
+# Load your book text (book1.txt)
+file_path = "book1.txt"
+large_text = read_text_file(file_path)
+
+# Chunk the large text into smaller pieces
+chunks = chunk_input(large_text)
+
 # to convert pdf to txt in oreder to load it to the knowledge base    
 
 import fitz  # PyMuPDF
@@ -66,6 +85,7 @@ def convert_pdf_to_txt(pdf_path: str, txt_path: str):
 # txt_path = "book1.txt"
 
 # convert_pdf_to_txt(pdf_path, txt_path)
+
 
 update_knowledge_base("book1.txt")  # Call this function to update the knowledge base    
 
@@ -116,43 +136,4 @@ def answer_query(query: str):
 # lets try it out :)
 response = answer_query("how can i get rich fast? what are the tips and mindset do i need to have?")
 print(response)
-
-################################
-
-import os
-
-# Function to read the contents of the text file (book1.txt)
-def read_text_file(file_path):
-    with open(file_path, "r", encoding="utf-8") as file:
-        return file.read()
-
-# Example function to chunk large input into smaller pieces
-def chunk_input(text, max_tokens=8193):
-    # Break the text into chunks of a reasonable size (e.g., 4000 tokens)
-    chunk_size = max_tokens // 2  # Leave some room for the response
-    chunks = [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
-    return chunks
-
-# Load your book text (book1.txt)
-file_path = "book1.txt"
-large_text = read_text_file(file_path)
-
-# Chunk the large text into smaller pieces
-chunks = chunk_input(large_text)
-
-# Query the model for each chunk and get answers
-query = "How can I get rich fast? What are the tips and mindset I need to have?"
-
-# Assuming 'llm' is your pre-configured model (e.g., Together, OpenAI, etc.)
-answers = []
-for chunk in chunks:
-    prompt = f"Answer the following question based on this text:\n\n{chunk}\n\nQuestion: {query}"
-    response = llm.invoke(prompt)
-    answers.append(response)
-
-# Combine all the answers from different chunks
-final_answer = " ".join(answers)
-
-# Print the final combined answer
-print(final_answer)
 
