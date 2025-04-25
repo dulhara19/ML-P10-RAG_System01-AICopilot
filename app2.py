@@ -48,21 +48,16 @@ def search_from_db(query: str, top_k: int = 4):
                 "path": "embedding",
                 "numCandidates": 100,
                 "limit": top_k,
-                "index": "faq_vector_index"  # Must be pre-created on MongoDB
+                "index": "vector_index"  # Must be pre-created on MongoDB
             }
         }
     ])
     
-
-#     return list(results)
-
+    return list(results)
 
 
-
-
-
-# from langchain_community.llms import Together
-# from langchain.schema import Document
+from langchain_community.llms import Together
+from langchain.schema import Document
 
 # # LLM Setup (Together or OpenAI or whatever you like)
 # import os
