@@ -51,55 +51,100 @@ def convert_pdf_to_txt(pdf_path: str, txt_path: str):
     print(f"✅ PDF converted and saved to: {txt_path}")
 
 
-convert_pdf_to_txt("/pdf_src/mfl.pdf", "book1.txt")
+
+# import os
+# print(os.getcwd())  # shows your current working directory
+# pdf_path = os.path.join("pdf_src", "mfl.pdf")
+# txt_path = "book1.txt"
+
+# convert_pdf_to_txt(pdf_path, txt_path)
 
 update_knowledge_base("book1.txt")  # Call this function to update the knowledge base    
 
-# def search_from_db(query: str, top_k: int = 4):
-#     query_embedding = embedding_model.embed_query(query)
+def search_from_db(query: str, top_k: int = 4):
+    query_embedding = embedding_model.embed_query(query)
 
-#     results = collection.aggregate([
-#         {
-#             "$vectorSearch": {
-#                 "queryVector": query_embedding,
-#                 "path": "embedding",
-#                 "numCandidates": 100,
-#                 "limit": top_k,
-#                 "index": "vector_index"  # Must be pre-created on MongoDB
-#             }
-#         }
-#     ])
+    results = collection.aggregate([
+        {
+            "$vectorSearch": {
+                "queryVector": query_embedding,
+                "path": "embedding",
+                "numCandidates": 100,
+                "limit": top_k,
+                "index": "vector_index"  # Must be pre-created on MongoDB
+            }
+        }
+    ])
     
-#     return list(results)
+    return list(results)
 
 
-# from langchain_community.llms import Together
-# from langchain.schema import Document
+from langchain_community.llms import Together
+from langchain.schema import Document
 
-# # LLM Setup (Together or OpenAI or whatever you like)
-# import os
-# os.environ["TOGETHER_API_KEY"] = "8b2035e3b8314dd8f68f02c652751e447eb94870e2f580ed1bb4955287318a14"
+# LLM Setup (Together or OpenAI or whatever you like)
+import os
+os.environ["TOGETHER_API_KEY"] = "8b2035e3b8314dd8f68f02c652751e447eb94870e2f580ed1bb4955287318a14"
 
-# llm = Together(
-#     model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
-#     temperature=0.7,
-#     max_tokens=512
-# )
+llm = Together(
+    model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
+    temperature=0.7,
+    max_tokens=512
+)
 
-# def answer_query(query: str):
-#     results = search_from_db(query)
+def answer_query(query: str):
+    results = search_from_db(query)
 
-#     sources = [Document(page_content=doc["content"]) for doc in results]
+    sources = [Document(page_content=doc["content"]) for doc in results]
 
-#     # Very simple QA chain simulation
-#     combined_text = "\n\n".join(doc.page_content for doc in sources)
+    # Very simple QA chain simulation
+    combined_text = "\n\n".join(doc.page_content for doc in sources)
 
-#     prompt = f"base on the contxt {sources} give answer to the question :{query}"
+    prompt = f"base on the contxt {sources} give answer to the question :{query}"
     
-#     response = llm.invoke(prompt)
-#     return response
+    response = llm.invoke(prompt)
+    return response
 
-# # lets try it out :)
-# response = answer_query("How can I achieve financial freedom?")
-# print(response)
+# lets try it out :)
+response = answer_query("how can i get rich fast? what are the tips and mindset do i need to have?")
+print(response)
+
+################################
+
+import os
+
+# Function to read the contents of the text file (book1.txt)
+def read_text_file(file_path):
+    with open(file_path, "r", encoding="utf-8") as file:
+        return file.read()
+
+# Example function to chunk large input into smaller pieces
+def chunk_input(text, max_tokens=8193):
+    # Break the text into chunks of a reasonable size (e.g., 4000 tokens)
+    chunk_size = max_tokens // 2  # Leave some room for the response
+    chunks = [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
+    return chunks
+
+# Load your book text (book1.txt)
+file_path = "book1.txt"
+large_text = read_text_file(file_path)
+
+# Chunk the large text into smaller pieces
+chunks = chunk_input(large_text)
+
+# Query the model for each chunk and get answers
+query = "How can I get rich fast? What are the tips and mindset I need to have?"
+
+# Assuming 'llm' is your pre-configured model (e.g., Together, OpenAI, etc.)
+answers = []
+for chunk in chunks:
+    prompt = f"Answer the following question based on this text:\n\n{chunk}\n\nQuestion: {query}"
+    response = llm.invoke(prompt)
+    answers.append(response)
+
+# Combine all the answers from different chunks
+final_answer = " ".join(answers)
+
+# Print the final combined answer
+print(final_answer)
 
