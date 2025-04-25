@@ -2,9 +2,17 @@ import pymongo
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Access the variables
+together_api_key = os.getenv("TOGETHER_API_KEY")
+mongo_uri = os.getenv("MONGO_URI")
 
 # MongoDB Connection
-client = pymongo.MongoClient("mongodb+srv://wkldulhara:Lakshan2001mongodb@cluster0.sjz9f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")  # or your MongoDB Atlas URI
+client = pymongo.MongoClient(mongo_uri)  # or your MongoDB Atlas URI
 db = client["financialdata"]
 collection = db["faqs"]
 
@@ -84,7 +92,7 @@ from langchain.schema import Document
 
 # LLM Setup (Together or OpenAI or whatever you like)
 import os
-os.environ["TOGETHER_API_KEY"] = "8b2035e3b8314dd8f68f02c652751e447eb94870e2f580ed1bb4955287318a14"
+os.environ["TOGETHER_API_KEY"] = together_api_key
 
 llm = Together(
     model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
