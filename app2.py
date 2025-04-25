@@ -50,4 +50,5 @@ def search_from_db(query: str, top_k: int = 4):
         }
     ])
     
+    
     return list(results)
