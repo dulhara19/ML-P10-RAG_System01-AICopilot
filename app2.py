@@ -64,18 +64,18 @@ chunks = chunk_input(large_text)
 
 # to convert pdf to txt in oreder to load it to the knowledge base    
 
-import fitz  # PyMuPDF
+# import fitz  # PyMuPDF
 
-def convert_pdf_to_txt(pdf_path: str, txt_path: str):
-    doc = fitz.open(pdf_path)
-    text = ""
-    for page in doc:
-        text += page.get_text()
+# def convert_pdf_to_txt(pdf_path: str, txt_path: str):
+#     doc = fitz.open(pdf_path)
+#     text = ""
+#     for page in doc:
+#         text += page.get_text()
 
-    with open(txt_path, "w", encoding="utf-8") as f:
-        f.write(text)
+#     with open(txt_path, "w", encoding="utf-8") as f:
+#         f.write(text)
 
-    print(f"✅ PDF converted and saved to: {txt_path}")
+#     print(f"✅ PDF converted and saved to: {txt_path}")
 
 
 
@@ -87,7 +87,7 @@ def convert_pdf_to_txt(pdf_path: str, txt_path: str):
 # convert_pdf_to_txt(pdf_path, txt_path)
 
 
-update_knowledge_base("book1.txt")  # Call this function to update the knowledge base    
+update_knowledge_base("faqs2.txt")  # Call this function to update the knowledge base    
 
 def search_from_db(query: str, top_k: int = 4):
     query_embedding = embedding_model.embed_query(query)
@@ -116,7 +116,7 @@ os.environ["TOGETHER_API_KEY"] = together_api_key
 
 llm = Together(
     model="deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
-    temperature=0.7,
+    temperature=0.5,
     max_tokens=512
 )
 
