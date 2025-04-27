@@ -58,16 +58,15 @@ qa_chain = RetrievalQA.from_chain_type(
 #     Use cosine similarity to compare generated answer with expected answer (ground truth)
 #     Higher = better
 
-from sentence_transformers import SentenceTransformer, util
+# from sentence_transformers import SentenceTransformer, util
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
-score = util.cos_sim(
-    model.encode(generated_answer),
-    model.encode(ground_truth_answer)
-)
-print("Similarity score:", score.item())
+# model = SentenceTransformer("all-MiniLM-L6-v2")
+# score = util.cos_sim(
+#     model.encode(generated_answer),
+#     model.encode(ground_truth_answer)
+# )
+# print("Similarity score:", score.item())
 ###################################
-
 
 
 # Test if LLM is working with a question
