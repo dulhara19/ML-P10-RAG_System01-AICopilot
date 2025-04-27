@@ -68,7 +68,6 @@ qa_chain = RetrievalQA.from_chain_type(
 # print("Similarity score:", score.item())
 ###################################
 
-
 # Test if LLM is working with a question
 question = "how can i buy laptop in UK?"
 
