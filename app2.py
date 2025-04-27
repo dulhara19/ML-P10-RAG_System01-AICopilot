@@ -77,8 +77,6 @@ chunks = chunk_input(large_text)
 
 #     print(f"✅ PDF converted and saved to: {txt_path}")
 
-
-
 # import os
 # print(os.getcwd())  # shows your current working directory
 # pdf_path = os.path.join("pdf_src", "mfl.pdf")
