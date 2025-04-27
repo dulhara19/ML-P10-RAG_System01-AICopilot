@@ -128,7 +128,7 @@ def answer_query(query: str):
     # Very simple QA chain simulation
     combined_text = "\n\n".join(doc.page_content for doc in sources)
 
-    prompt = f"base on the contxt {sources} give answer to the question :{query}"
+    prompt = f"base on the contxt {combined_text} give answer to the question :{query}"
     
     response = llm.invoke(prompt)
     return response
