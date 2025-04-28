@@ -49,7 +49,7 @@ def read_text_file(file_path):
         return file.read()
 
 # Example function to chunk large input into smaller pieces
-def chunk_input(text, max_tokens=8193):
+def chunk_input(text, max_tokens=200000):
     # Break the text into chunks of a reasonable size (e.g., 4000 tokens)
     chunk_size = max_tokens // 2  # Leave some room for the response
     chunks = [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
