@@ -6,4 +6,4 @@ python-dotenv
 langchain-community
 sentence-transformers
 pymongo
-PyMuPDF
+//PyMuPDF
