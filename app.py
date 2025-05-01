@@ -50,7 +50,8 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 
-###################################
+###############evaluation#################
+
 #Automated Evaluation (Optional but Scalable)
 
 # You can evaluate programmatically using tools like:
@@ -66,6 +67,7 @@ qa_chain = RetrievalQA.from_chain_type(
 #     model.encode(ground_truth_answer)
 # )
 # print("Similarity score:", score.item())
+
 ###################################
 
 # Test if LLM is working with a question
