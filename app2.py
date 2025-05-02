@@ -123,13 +123,22 @@ def answer_query(query: str):
 
     sources = [Document(page_content=doc["content"]) for doc in results]
 
-    # Very simple QA chain simulation
+    # Join up to 2000 characters only
     combined_text = "\n\n".join(doc.page_content for doc in sources)
+    combined_text = combined_text[:2000]  # Limit size
 
-    prompt = f"base on the contxt {combined_text} give answer to the question :{query}"
+    prompt = f"""Based on the following context, answer the question.
+
+Context:
+{combined_text}
+
+Question:
+{query}
+"""
     
     response = llm.invoke(prompt)
     return response
+
 
 # lets try it out :)
 response = answer_query("how can i get rich fast? what are the tips and mindset do i need to have?")
