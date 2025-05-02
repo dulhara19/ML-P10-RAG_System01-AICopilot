@@ -141,6 +141,6 @@ Question:
 
 
 # lets try it out :)
-response = answer_query("how can i get rich fast? what are the tips and mindset do i need to have?")
+response = answer_query("how can i change the mindset to make money fast")
 print(response)
 
