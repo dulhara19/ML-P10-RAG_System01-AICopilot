@@ -67,7 +67,7 @@ qa_chain = RetrievalQA.from_chain_type(
 # )
 # print("Similarity score:", score.item())
 
-#----------evaluation-end-------
+#----------evaluation-end------------
 
 
 # Test if LLM is working with a question
