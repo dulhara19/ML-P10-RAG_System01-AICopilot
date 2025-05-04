@@ -142,6 +142,7 @@ Question:
 
 
 # lets try it out :)
-response = answer_query("how can i change the mindset to make money fast")
+text=get_text
+response = answer_query("text")
 print(response)
 
