@@ -4,6 +4,7 @@ from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
 from dotenv import load_dotenv
 import os
+import get_text from speech.py
 # Load environment variables from .env file
 load_dotenv()
 
