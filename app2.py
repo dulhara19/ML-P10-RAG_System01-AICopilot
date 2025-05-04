@@ -142,7 +142,7 @@ Question:
 
 
 # lets try it out :)
-speech=get_text
+speech=get_text()
 response = answer_query(speech)
 print(response)
 
