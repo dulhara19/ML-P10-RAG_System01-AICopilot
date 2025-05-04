@@ -4,7 +4,7 @@ from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
 from dotenv import load_dotenv
 import os
-import get_text from speech.py
+from speech import get_text
 # Load environment variables from .env file
 load_dotenv()
 
@@ -86,7 +86,7 @@ chunks = chunk_input(large_text)
 # convert_pdf_to_txt(pdf_path, txt_path)
 
 
-update_knowledge_base("faqs2.txt")  # Call this function to update the knowledge base    
+# update_knowledge_base("faqs2.txt")  # Call this function to update the knowledge base    
 
 def search_from_db(query: str, top_k: int = 4):
     query_embedding = embedding_model.embed_query(query)
