@@ -142,7 +142,6 @@ Question:
     response = llm.invoke(prompt)
     return response
 
-
 # lets try it out :)
 speech=get_text()
 response = answer_query(speech)
