@@ -5,6 +5,8 @@ from langchain.text_splitter import CharacterTextSplitter
 from dotenv import load_dotenv
 import os
 from speech import get_text
+from speech import speak_text
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -145,4 +147,6 @@ Question:
 speech=get_text()
 response = answer_query(speech)
 print(response)
+speak_text(response)  # Speak the response
+
 
