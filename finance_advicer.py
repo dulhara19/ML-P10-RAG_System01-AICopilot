@@ -25,7 +25,6 @@ embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 # Text Splitter
 splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 
-
 def update_knowledge_base(file_path: str):
     # Load the file
     loader = TextLoader(file_path, encoding="utf-8")
@@ -143,5 +142,3 @@ speech=get_text()
 response = answer_query(speech)
 print(response)
 speak_text(response)  # Speak the response
-
-
