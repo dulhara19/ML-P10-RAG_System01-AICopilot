@@ -50,8 +50,8 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 
-#---------evaluation-start-----------
-#----------Automated Evaluation (Optional but Scalable)----------
+#---------evaluation-start(just for testing)-----------
+#----------Automated Evaluation(Optional but Scalable)----------
 
 # You can evaluate programmatically using tools like:
 # 🔹 Embedding similarity
