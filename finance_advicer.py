@@ -3,9 +3,9 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
 from dotenv import load_dotenv
-import os
 from speech import get_text
 from speech import speak_text
+import os
 
 # Load environment variables from .env file
 load_dotenv()
@@ -65,8 +65,7 @@ large_text = read_text_file(file_path)
 # Chunk the large text into smaller pieces
 chunks = chunk_input(large_text)
 
-# to convert pdf to txt in oreder to load it to the knowledge base    
-
+#------to convert pdf to txt in oreder to load it to the knowledge base-------  
 # import fitz  # PyMuPDF
 
 # def convert_pdf_to_txt(pdf_path: str, txt_path: str):
@@ -84,10 +83,7 @@ chunks = chunk_input(large_text)
 # print(os.getcwd())  # shows your current working directory
 # pdf_path = os.path.join("pdf_src", "mfl.pdf")
 # txt_path = "book1.txt"
-
 # convert_pdf_to_txt(pdf_path, txt_path)
-
-
 # update_knowledge_base("faqs2.txt")  # Call this function to update the knowledge base    
 
 def search_from_db(query: str, top_k: int = 4):
