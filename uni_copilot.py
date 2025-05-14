@@ -5,6 +5,11 @@ from langchain_community.llms import Together
 from langchain.chains import RetrievalQA
 from langchain.text_splitter import CharacterTextSplitter
 
+
+
+
+
+
 # Load FAQs document
 loader = TextLoader("faqs.txt", encoding="utf-8")
 docs = loader.load()
