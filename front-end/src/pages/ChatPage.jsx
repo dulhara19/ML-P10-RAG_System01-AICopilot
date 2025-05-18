@@ -37,7 +37,7 @@ function ChatPage() {
     
     
     <div className="flex flex-col h-screen items-center justify-center">
-      <Header />
+  
       <ChatWindow messages={messages} isTyping={isTyping} />
       <InputBox onSend={sendMessage} />
     </div>
