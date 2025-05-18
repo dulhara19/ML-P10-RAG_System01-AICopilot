@@ -1,3 +1,4 @@
+
 function ChatWindow({ messages, isTyping }) {
   return (
     <div className="flex flex-col gap-2 overflow-y-auto w-full max-w-3xl p-4 h-[70vh] bg-white shadow-lg rounded-lg">
