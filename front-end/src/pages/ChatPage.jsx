@@ -1,6 +1,11 @@
 import { useState } from "react";
+
+
+
+import Header from "../components/Header";
 import ChatWindow from "../components/ChatWindow";
 import InputBox from "../components/InputBox";
+import MessegeBubble from "../components/MessageBubble";
 
 function ChatPage() {
   const [messages, setMessages] = useState([
@@ -29,7 +34,10 @@ function ChatPage() {
   };
 
   return (
+    
+    
     <div className="flex flex-col h-screen items-center justify-center">
+      <Header />
       <ChatWindow messages={messages} isTyping={isTyping} />
       <InputBox onSend={sendMessage} />
     </div>
